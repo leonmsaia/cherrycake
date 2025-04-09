@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  cakephp-app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: cakephp_app
+    volumes:
+      - ./cherrycake:/var/www/html
+      - ./database/database.sqlite:/var/www/html/database/database.sqlite
+    ports:
+      - "8080:80"
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/webroot

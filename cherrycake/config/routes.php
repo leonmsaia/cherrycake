@@ -78,6 +78,12 @@ return function (RouteBuilder $routes): void {
         $builder->fallbacks();
     });
 
+    $routes->prefix('Admin', function ($routes) {
+        $routes->connect('/migrations', ['controller' => 'Migrations', 'action' => 'index']);
+        $routes->connect('/migrations/run', ['controller' => 'Migrations', 'action' => 'run']);
+        $routes->fallbacks();
+    });
+
     /*
      * If you need a different set of middleware or none at all,
      * open new scope and define routes there.
