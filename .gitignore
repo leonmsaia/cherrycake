@@ -1,0 +1,7 @@
+/vendor/
+tmp/*
+logs/*
+/config/app_local.php
+/.env
+/database/*.sqlite
+/database/*.sqlite-journal
