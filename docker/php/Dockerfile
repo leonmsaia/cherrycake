@@ -11,6 +11,10 @@ RUN apt-get update && apt-get install -y \
     libsqlite3-dev \
     && docker-php-ext-install intl pdo pdo_sqlite
 
+RUN docker-php-ext-install pdo_mysql
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 # Activar mod_rewrite para CakePHP
 RUN a2enmod rewrite
 
