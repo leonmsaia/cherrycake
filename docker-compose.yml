@@ -10,6 +10,6 @@ services:
       - ./cherrycake:/var/www/html
       - ./database/database.sqlite:/var/www/html/database/database.sqlite
     ports:
-      - "8080:80"
+      - "8547:80"
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html/webroot
