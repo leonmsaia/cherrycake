@@ -1,44 +1,36 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+
+$this->assign('title', 'Crear Migración');
+?>
+
 <h1>Crear Migración</h1>
 
-<?= $this->Form->create(null) ?>
-
-<?= $this->Form->control('table', ['label' => 'Nombre de la tabla']) ?>
-
-<div id="fields-container">
-    <div class="field-group">
-        <?= $this->Form->control('fields.0.name', ['label' => 'Campo']) ?>
-        <?= $this->Form->control('fields.0.type', [
-            'type' => 'select',
-            'options' => ['string' => 'string', 'text' => 'text', 'integer' => 'integer', 'datetime' => 'datetime'],
-            'label' => 'Tipo'
-        ]) ?>
+<?= $this->Form->create(null, ['url' => ['prefix' => 'Admin', 'controller' => 'Migrations', 'action' => 'create']]) ?>
+    <div>
+        <?= $this->Form->control('migration_name', ['label' => 'Nombre de la migración (ej: productos)', 'required' => true]) ?>
     </div>
-</div>
 
-<button type="button" onclick="addField()">+ Agregar campo</button>
+    <div id="fields-wrapper">
+        <div class="field-group">
+            <?= $this->Form->control('fields[]', ['label' => 'Campo', 'required' => true]) ?>
+        </div>
+    </div>
 
-<?= $this->Form->button('Generar Migración') ?>
+    <button type="button" onclick="addField()">+ Agregar Campo</button>
+
+    <br><br>
+    <?= $this->Form->button('Generar Migración') ?>
 <?= $this->Form->end() ?>
 
-<br>
-<?= $this->Html->link('Ejecutar migraciones', ['action' => 'run'], ['class' => 'button']) ?>
-
 <script>
-let fieldIndex = 1;
 function addField() {
-    const container = document.getElementById('fields-container');
-    const group = document.createElement('div');
-    group.classList.add('field-group');
-    group.innerHTML = `
-        <input name="fields[${fieldIndex}][name]" placeholder="Campo" />
-        <select name="fields[${fieldIndex}][type]">
-            <option value="string">string</option>
-            <option value="text">text</option>
-            <option value="integer">integer</option>
-            <option value="datetime">datetime</option>
-        </select>
-    `;
-    container.appendChild(group);
-    fieldIndex++;
+    const wrapper = document.getElementById('fields-wrapper');
+    const div = document.createElement('div');
+    div.className = 'field-group';
+    div.innerHTML = `<input type="text" name="fields[]" placeholder="Ej: title:string" required>`;
+    wrapper.appendChild(div);
 }
 </script>
